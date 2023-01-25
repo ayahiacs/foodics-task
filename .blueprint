@@ -1,0 +1,11 @@
+created:
+    - app/Http/Controllers/Api/OrderController.php
+    - tests/Feature/Http/Controllers/Api/OrderControllerTest.php
+    - app/Events/OrderPlaced.php
+models:
+    User: {  }
+    Ingredient: { name: string, stock_grams: Integer, stock_minimum_grams: Integer, stock_minimum_notification_enabled: boolean, relationships: { hasMany: 'Product:product_ingredients' } }
+    Product: { name: string, relationships: { hasMany: 'Ingredient:product_ingredients' } }
+    ProductIngredient: { product_id: Product, ingredient_id: Ingredient, grams: Integer, relationships: { belongsTo: 'Product, Ingredient' } }
+    Order: { relationships: { hasMany: OrderProduct } }
+    OrderProduct: { order_id: Order, product_id: Product, quantity: Integer, relationships: { belongsTo: 'Product, Order' } }
